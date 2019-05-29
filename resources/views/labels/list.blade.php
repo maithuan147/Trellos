@@ -42,7 +42,7 @@
                     <button class="btn btn-primary btn-show-table-options">Filters</button>
                 </div>
                 <div class="col-sm-6 justify-content-end display-flex">
-                    <a href="{{ route('attachment.create') }}" class="bg-36c6d3 px-10 mr-10 color-white"><i class="fa fa-plus"></i> Create</a>
+                    <a href="{{ route('label.create') }}" class="bg-36c6d3 px-10 mr-10 color-white"><i class="fa fa-plus"></i> Create</a>
                     <a href="" class="bg-36c6d3 px-10 color-white"><i class="fas fa-sync"></i> Reload</a>			
                 </div>
             </div>
@@ -50,22 +50,18 @@
         <table class="table table-striped mx-15 mb-0 ">
             <tr class="bg-fbfcfd color-AFAFAF">
                 <th width="5%" class="text-center">ID</th>
-                <th width="30%" class="text-center">FILENAME</th>
-                <th width="20%" class="text-center">TASK</th>
-                <th width="15%" class="text-center">CREATED_AT</th>
-                <th width="15%" class="text-center">UPDATED_AT</th>
+                <th width="50%" class="text-center">NAME</th>
+                <th width="30%" class="text-center">TASK</th>
                 <th width="15%" class="text-center">OPERATIONS</th>
             </tr>
-            @foreach ($attachments as $attachment)
+            @foreach ($labels as $label)
                 <tr class="child">
-                    <td class="text-center vertical-align-middle">{{ $attachment->id }}</td>
-                    <td class="text-center vertical-align-middle">{{ $attachment->filename }}</td>
-                    <td class="text-center vertical-align-middle">{{ $attachment->task->title }}</td>
-                    <td class="text-center vertical-align-middle">{{ $attachment->created_at->toDateString() }}</td>
-                    <td class="text-center vertical-align-middle">{{ $attachment->updated_at->toDateString()  }}</td>
+                    <td class="text-center vertical-align-middle">{{ $label->id }}</td>
+                    <td class="text-center vertical-align-middle">{{ $label->name }}</td>
+                    <td class="text-center vertical-align-middle">{{ $label->task->title }}</td>
                     <td class="text-center vertical-align-middle"> 
-                        <a href="{{ route('attachment.edit', $attachment) }}" class="btn btn-primary font-size-15"><i class="fa fa-edit"></i></a>
-                        <form action="{{ route('attachment.destroy',$attachment) }}" method="post" class="display-inline-block">
+                        <a href="{{ route('label.edit', $label) }}" class="btn btn-primary font-size-15"><i class="fa fa-edit"></i></a>
+                        <form action="{{ route('label.destroy',$label) }}" method="post" class="display-inline-block">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn bg-dc3545 color-white font-size-15"><i class="fa fa-trash"></i></button>
@@ -74,7 +70,7 @@
             </tr>
             @endforeach
         </table>
-        {{ $attachments->links() }}
+        {{ $labels->links() }}
         </div>
     </div>
     

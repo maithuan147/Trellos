@@ -17,11 +17,17 @@ Route::get('/', function () {
 Route::get('index', function () {
     return view('index');
 })->name('index');
-Route::resource('listtask', 'ListtaskController');
-Route::resource('user', 'UserController');
-Route::resource('task', 'TaskController');
-Route::resource('comment', 'CommentController');
-Route::resource('attachments', 'AttachmentsController');
+
+
+Route::group(['middleware'=>'auth'],function () {
+    Route::resource('listtask', 'ListtaskController');
+    Route::resource('user', 'UserController');
+    Route::resource('task', 'TaskController');
+    Route::resource('comment', 'CommentController');
+    Route::resource('attachment', 'AttachmentController');
+    Route::resource('checklist', 'ChecklistController');
+    Route::resource('label', 'LabelController');
+});
 
 
 Auth::routes();

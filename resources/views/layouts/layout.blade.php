@@ -192,9 +192,9 @@
                   <ul class="treeview-menu">
                     <li><a href="{{ url('task') }}"><i class="fa fa-circle-o"></i> Tasks</a></li>
                     <li><a href="{{ url('comment') }}"><i class="fa fa-circle-o"></i> Comments</a></li>
-                    <li><a href="{{ url('attachments') }}"><i class="fa fa-circle-o"></i> Attachments</a></li>
-                    <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Checklists</a></li>
-                    <li><a href="pages/forms/editors.html"><i class="fa fa-circle-o"></i> Labels</a></li>
+                    <li><a href="{{ url('attachment') }}"><i class="fa fa-circle-o"></i> Attachments</a></li>
+                    <li><a href="{{ url('checklist') }}"><i class="fa fa-circle-o"></i> Checklists</a></li>
+                    <li><a href="{{ url('label') }}"><i class="fa fa-circle-o"></i> Labels</a></li>
                   </ul>
                 </li>
 

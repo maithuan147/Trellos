@@ -27,31 +27,26 @@
             <li class="active">Simple</li>
         </ol>
         </section>
-        <form method="POST" action="{{ route('task.store') }}" class="mx-15 mt-20">
+        <form method="POST" action="{{ route('label.store') }}" class="mx-15 mt-20">
             @csrf
             @method('POST')
             <div class="row">
                 <div class="col-md-9">
                     <div class="main-form bg-white pxy-15">
                         <div class="form-body row">
-                            <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Title<span style="color: red"> *</span></label>
-                                <input class="form-control" data-counter="30" name="title" type="text" required="">
-                                @foreach($errors->get('title') as $err)
-                                    {{$err}}
-                                @endforeach
+                            <div class="form-group col-md-12">
+                                <label for="content" class="control-label col-md-2">{{ __('Name')}}<span style="color: red"> *</span></label>
+                                <div class="col-md-10">
+                                    <input class="form-control" id="content" data-counter="30" name="name" type="text" required>
+                                </div>
                             </div>
-                            
-                            <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Description<span style="color: red"> *</span></label>
-                                <input class="form-control" data-counter="30" name="description" type="text" required="">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="role_id" class="control-label">Status<span style="color: red"> *</span></label>
-                                <div class="ui-select-wrapper">
-                                    <select class="form-control  bg-1111 roles-list ui-select ui-select" id="role_id" name="status">
-                                        <option value="1">Active</option>
-                                        <option value="0">Off</option>
+                            <div class="form-group col-md-12">
+                                <label class="control-label col-md-2">{{ __('Task') }}<span style="color: red"> {{ __('*') }}</span></label>
+                                <div class="col-md-10">
+                                    <select class="form-control" name="task_id">
+                                        @foreach ($tasks as $task)
+                                            <option value="{{ $task->id }}">{{ $task->title }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>

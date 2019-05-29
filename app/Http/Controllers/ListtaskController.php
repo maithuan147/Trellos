@@ -15,9 +15,6 @@ class ListtaskController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
         $listtasks = Listtask::paginate(5);
         $data = compact('listtasks');
        // dd($listtask);

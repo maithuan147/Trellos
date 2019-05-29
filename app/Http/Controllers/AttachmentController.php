@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Attachments;
+use App\Task;
+use App\Attachment;
 use Illuminate\Http\Request;
 
-class AttachmentsController extends Controller
+class AttachmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class AttachmentsController extends Controller
      */
     public function index()
     {
-        $attachments = Attachments::paginate(5);
+        $attachments = Attachment::paginate(5);
         $data = compact('attachments');
         return view('attachments.list',$data);
     }
@@ -26,7 +27,9 @@ class AttachmentsController extends Controller
      */
     public function create()
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        return view('attachments.create',$data);
     }
 
     /**
@@ -35,9 +38,12 @@ class AttachmentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Attachment $attachment)
     {
-        //
+        $data = $request->all();
+        $attachment->fill($data);
+        $attachment->save();
+        return redirect()->route('attachment.index');
     }
 
     /**
@@ -46,7 +52,7 @@ class AttachmentsController extends Controller
      * @param  \App\Models\Attachments  $attachments
      * @return \Illuminate\Http\Response
      */
-    public function show(Attachments $attachments)
+    public function show(Attachment $attachment)
     {
         //
     }
@@ -57,9 +63,13 @@ class AttachmentsController extends Controller
      * @param  \App\Models\Attachments  $attachments
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attachments $attachments)
+    public function edit(Attachment $attachment)
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        $data1 = compact('attachment');
+        //dd($data);
+        return view('attachments.edit',$data,$data1);
     }
 
     /**
@@ -69,9 +79,12 @@ class AttachmentsController extends Controller
      * @param  \App\Models\Attachments  $attachments
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attachments $attachments)
+    public function update(Request $request, Attachment $attachment)
     {
-        //
+        $data = $request->all();
+        $attachment->fill($data);
+        $attachment->save();
+        return redirect()->route('attachment.index');
     }
 
     /**
@@ -80,8 +93,9 @@ class AttachmentsController extends Controller
      * @param  \App\Models\Attachments  $attachments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attachments $attachments)
+    public function destroy(Attachment $attachment)
     {
-        //
+        $attachment->delete();
+        return redirect()->route('attachment.index');
     }
 }

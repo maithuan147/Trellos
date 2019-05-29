@@ -15,9 +15,6 @@ class TaskController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
         $task = task::paginate(5);
         $data = compact('task');
         // dd('user');
@@ -42,6 +39,16 @@ class TaskController extends Controller
      */
     public function store(Request $request , Task $task)
     {
+        $this->validate($request,[
+            'title' => 'required|unique:tasks,title|min:3|max:255',
+           // 's'  => 'required'
+        ],[
+            'title.required' => 'ten ko dc rong',
+            'title.unique' => 'ten ko dc trung',
+            'title.min' => 'ten ko dc nho hon 3 ky tu',
+            'title.max' => 'ten ko dc rlon hon 255 ky tu',
+           // 's.required' => 'ko dc rong',
+        ]);
         $data = $request->all();
         $task->fill($data);
         $task->save();

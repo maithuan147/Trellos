@@ -102,7 +102,7 @@ class CommentController extends Controller
      */
     public function destroy(Comment $comment)
     {
-        $user->delete();
+        $comment->delete();
         return redirect()->route('comment.index');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Task;
 use App\Checklist;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,9 @@ class ChecklistController extends Controller
      */
     public function index()
     {
-        //
+        $checklists = Checklist::paginate(5);
+        $data = compact('checklists');
+        return view('checklists.list',$data);
     }
 
     /**
@@ -24,7 +27,9 @@ class ChecklistController extends Controller
      */
     public function create()
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        return view('checklists.create',$data);
     }
 
     /**
@@ -33,9 +38,12 @@ class ChecklistController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Checklist $checklist)
     {
-        //
+        $data = $request->all();
+        $checklist->fill($data);
+        $checklist->save();
+        return redirect()->route('checklist.index');
     }
 
     /**
@@ -57,7 +65,11 @@ class ChecklistController extends Controller
      */
     public function edit(Checklist $checklist)
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        $data1 = compact('checklist');
+        //dd($data);
+        return view('checklists.edit',$data,$data1);
     }
 
     /**
@@ -69,7 +81,10 @@ class ChecklistController extends Controller
      */
     public function update(Request $request, Checklist $checklist)
     {
-        //
+        $data = $request->all();
+        $checklist->fill($data);
+        $checklist->save();
+        return redirect()->route('checklist.index');
     }
 
     /**
@@ -80,6 +95,7 @@ class ChecklistController extends Controller
      */
     public function destroy(Checklist $checklist)
     {
-        //
+        $checklist->delete();
+        return redirect()->route('checklist.index');
     }
 }

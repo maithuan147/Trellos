@@ -6,8 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Label extends Model
 {
-    protected $timestamps = false; 
-    protected $table = 'attachments';
+    public $timestamps = false;
+    // protected $table = 'attachments';
     protected $fillable = [
     	'name','task_id'
     ];

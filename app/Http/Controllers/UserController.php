@@ -16,9 +16,6 @@ class UserController extends Controller
      */
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect()->route('login');
-        }
         $user = user::paginate(5);
         $data = compact('user');
         // dd('user');

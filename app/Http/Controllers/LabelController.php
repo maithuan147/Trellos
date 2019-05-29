@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Task;
 use App\Label;
 use Illuminate\Http\Request;
 
@@ -14,7 +14,9 @@ class LabelController extends Controller
      */
     public function index()
     {
-        //
+        $labels = Label::paginate(5);
+        $data = compact('labels');
+        return view('labels.list',$data);
     }
 
     /**
@@ -24,7 +26,9 @@ class LabelController extends Controller
      */
     public function create()
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        return view('labels.create',$data);
     }
 
     /**
@@ -33,9 +37,12 @@ class LabelController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request,Label $label)
     {
-        //
+        $data = $request->all();
+        $label->fill($data);
+        $label->save();
+        return redirect()->route('label.index');
     }
 
     /**
@@ -57,7 +64,11 @@ class LabelController extends Controller
      */
     public function edit(Label $label)
     {
-        //
+        $tasks = Task::all();
+        $data = compact('tasks');
+        $data1 = compact('label');
+        //dd($data);
+        return view('labels.edit',$data,$data1);
     }
 
     /**
@@ -69,7 +80,10 @@ class LabelController extends Controller
      */
     public function update(Request $request, Label $label)
     {
-        //
+        $data = $request->all();
+        $label->fill($data);
+        $label->save();
+        return redirect()->route('label.index');
     }
 
     /**
@@ -80,6 +94,7 @@ class LabelController extends Controller
      */
     public function destroy(Label $label)
     {
-        //
+        $label->delete();
+        return redirect()->route('label.index');
     }
 }
