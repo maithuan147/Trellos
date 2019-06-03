@@ -16,6 +16,8 @@ class ListtaskController extends Controller
     public function index()
     {
         $listtasks = Listtask::paginate(5);
+       // $comment = Listtask::find(1)->task;
+      //  dd($comment);
         $data = compact('listtasks');
        // dd($listtask);
         return view('list_task.list',$data);

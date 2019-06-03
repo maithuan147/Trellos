@@ -99,6 +99,7 @@ li,a,span,h3{
 }
 .widget{
     padding: 10px 15px 15px 15px;
+    border: 1px solid #ddd;
 }
 h4{
     font-size: 24px;
@@ -144,4 +145,34 @@ label{
 }
 .user-header p{
     color: black !important;
+}
+.checkbox input[type=checkbox]{
+    position: inherit !important;
+    margin-left: 0px !important;
+    margin-right: 5px;
+}
+.checkbox label{
+    display: inline-flex;
+}
+.dt-length-records,.dt-length-records span {
+    color: #1f64a0;
+}
+.badge {
+    color: white !important;
+}
+.mr-a30{
+    margin-right: -30px !important;
+}
+.ml-0{
+    margin-left: 0px !important;
+}
+.dt-length-records{
+    margin: 25px 0 !important;
+    display: inline-block
+}
+.hidden{
+    visibility: hidden;
+}
+.main-form{
+    border: 1px solid #ddd;
 }

@@ -35,15 +35,24 @@
                     <div class="main-form bg-white pxy-15">
                         <div class="form-body row">
                             <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Title<span style="color: red"> *</span></label>
+                                <label for="first_name" class="control-label required" aria-required="true">Title
+                                    <span style="color: red"> *
+                                        @foreach($errors->get('title') as $err)
+                                            {{$err}}
+                                        @endforeach
+                                    </span>
+                                </label>
                                 <input class="form-control" data-counter="30" name="title" type="text" required="">
-                                @foreach($errors->get('title') as $err)
-                                    {{$err}}
-                                @endforeach
                             </div>
                             
                             <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Description<span style="color: red"> *</span></label>
+                                <label for="first_name" class="control-label required" aria-required="true">Description
+                                    <span style="color: red"> * 
+                                        @foreach($errors->get('description') as $err)
+                                            {{$err}}
+                                        @endforeach
+                                    </span>
+                                </label>
                                 <input class="form-control" data-counter="30" name="description" type="text" required="">
                             </div>
                             <div class="col-md-12">
@@ -81,7 +90,7 @@
         </form>
     </div>
 @endsection
-@push('head')
+@push('scripts')
     <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>

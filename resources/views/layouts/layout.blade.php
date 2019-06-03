@@ -20,7 +20,7 @@
 <body>
     <header class="main-header">
         <!-- Logo -->
-        <a href="../../index2.html" class="logo">
+        <a href="{{ url('index') }}" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>A</b>LT</span>
             <!-- logo for regular state and mobile devices -->
@@ -98,15 +98,22 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <img src="{{ asset('img/user2.jpg') }}" class="user-image" alt="User Image">
+                            <img src="{{ asset(Auth::user()->image) }}" class="user-image" alt="User Image">
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                             <!-- User image -->
                             <li class="user-header">
-                                <img src="{{ asset('img/user2.jpg') }}" class="img-circle" alt="User Image">
+                                <form action="{{ route('upload',Auth::user()->id) }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
+                                    <label for="upload"><img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image" width="100px" height="100px" style="margin-top:10px"></label>
+                                    <input type="file" name="image" id="upload" class="hidden">
+                                    <button style=" position: absolute;right:20px" class="btn-primary">Luu</button>
+                                </form>
+                                <span style="color:red">{{ isset($errfile) ? $errfile : "" }}</span>
 
-                                <p>
+                                <p style="margin-top:0px !important">
                                     {{ Auth::user()->name }} - Web Developer
                                     <small>Member since Nov. 2012</small>
                                 </p>
@@ -129,7 +136,7 @@
                             <!-- Menu Footer-->
                             <li class="user-footer">
                                 <div class="pull-left">
-                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ url('user/'.Auth::user()->id.'/edit') }}" class="btn btn-default btn-flat">Profile</a>
                                 </div>
                                 <div class="pull-right">
                                     {{-- <a href="{{ route('logout')}}" class="btn btn-default btn-flat">Sign out</a> --}}
@@ -156,7 +163,7 @@
               <!-- Sidebar user panel -->
               <div class="user-panel">
                 <div class="pull-left image">
-                  <img src="{{ asset('img/user2.jpg') }}" class="img-circle" alt="User Image">
+                  <img src="{{ asset(Auth::user()->image) }}" class="img-circle" alt="User Image">
                 </div>
                 <div class="pull-left info">
                   <p>Alexander Pierce</p>
@@ -173,10 +180,16 @@
                   </a>
                 </li> 
                 <li class="">            
+                    <a href="{{ url('role') }}">
+                      <i class="fa fa-pie-chart"></i> <span>Role</span>
+                    </a>
+                  </li> 
+                <li class="">            
                   <a href="{{ url('listtask') }}">
-                    <i class="fa fa-pie-chart"></i> <span>Lists</span>
+                    <i class="fa fa-address-book-o"></i> <span>Lists</span>
                   </a>
-                </li> 
+                </li>
+
                 <li class="">            
                     <a href="{{ url('user') }}">
                         <i class="fa fa-laptop"></i> <span>Users</span>
@@ -209,11 +222,11 @@
     @yield('content')
     @stack('scripts')
     <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-              <b>Version</b> 2.4.0
-            </div>
-            <strong>Copyright © 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
-            reserved.
-          </footer>
+        <div class="pull-right hidden-xs">
+            <b>Version</b> 2.4.0
+        </div>
+        <strong>Copyright © 2014-2016 <a href="https://adminlte.io">Almsaeed Studio</a>.</strong> All rights
+        reserved.
+    </footer>
 </body>
 </html>

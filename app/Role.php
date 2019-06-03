@@ -12,12 +12,12 @@ class Role extends Model
     	'author','content_code','type','user_id','listtask_id','task_id',
     ];
     public function user(){
-        return $this->hasMany(User::class);
+        return $this->belongsToMany(User::class);
     }
     public function task(){
-        return $this->hasMany(Task::class);
+        return $this->belongsToMany(Task::class);
     }
     public function listtask(){
-        return $this->hasMany(Listtask::class);
+        return $this->belongsToMany(Listtask::class);
     }
 }

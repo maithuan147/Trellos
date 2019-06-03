@@ -66,10 +66,9 @@ class ChecklistController extends Controller
     public function edit(Checklist $checklist)
     {
         $tasks = Task::all();
-        $data = compact('tasks');
-        $data1 = compact('checklist');
+        $data = compact('tasks','checklist');
         //dd($data);
-        return view('checklists.edit',$data,$data1);
+        return view('checklists.edit',$data);
     }
 
     /**

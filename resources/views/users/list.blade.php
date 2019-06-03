@@ -19,13 +19,11 @@
         <!-- Content Header (Page header) -->
         <section class="content-header">
         <h1>
-            Simple Tables
-            <small>preview of simple tables</small>
+            User Tables
         </h1>
         <ol class="breadcrumb">
-            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            <li><a href="#">Tables</a></li>
-            <li class="active">Simple</li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+            <li><a href="#">User</a></li>
         </ol>
         </section>
         <div class="row bg-white font-size-13 mx-15 py-10 mt-15 mb-3">
@@ -39,11 +37,23 @@
                             <a class="dropdown-item" href="#">Another action</a>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-show-table-options">Filters</button>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Link with href
+                        </a>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                        <form action="{{ route('user.index') }}" method="GET">
+                            @csrf
+                        <input type="search" name="name" value="{{ $query }}">
+                            <input type="submit" name="submit" value="Search">
+                        </form>
+                        </div>
+                      </div>
                 </div>
+                
                 <div class="col-sm-6 justify-content-end display-flex">
                     <a href="{{ route('user.create') }}" class="bg-36c6d3 px-10 mr-10 color-white"><i class="fa fa-plus"></i> Create</a>
-                    <a href="" class="bg-36c6d3 px-10 color-white"><i class="fas fa-sync"></i> Reload</a>			
+                <a href="{{url()->current()}}" class="bg-36c6d3 px-10 color-white"><i class="fas fa-sync"></i> Reload</a>			
                 </div>
             </div>
         <div class="mr-30">
@@ -71,7 +81,7 @@
                 @endphp
                 <tr class="child">
                     <td class="text-center vertical-align-middle">{{ $users->id }}</td>
-                    <td class="text-center vertical-align-middle"><img style="width:50px;" src="{{  asset($users->image)  }}" alt="#"></td>
+                    <td class="text-center vertical-align-middle"><img style="width:50px;height:50px;" src="{{ asset($users->image)  }}" alt="#"></td>
                     <td class="text-center vertical-align-middle">{{ $users->name }}</td>
                     <td class="text-center color-337ab7 vertical-align-middle">{{ $users->email }}</td>
                     <td class="text-center vertical-align-middle bg-36c6d3 custom-opera">{{ $status  }}</td>
@@ -86,12 +96,20 @@
             </tr>
             @endforeach
         </table>
-        {{ $user->links() }}
+        
+        <div class="row mr-a30 ml-0">
+            <div class="col-sm-6">
+                <span class="dt-length-records">
+                <i class="fa fa-globe"></i> <span class="d-none d-sm-inline">Show from</span> {{ $user->firstItem() }} to {{ $user->lastItem() }} in <span class="badge badge-secondary bold badge-dt">{{ $user->total() }}</span> <span class="hidden-xs">records</span>
+				</span>
+            </div>
+            <div class="col-sm-6 display-flex justify-content-end">{{ $user->links() }}</div>
+        </div>
         </div>
     </div>
     
 @endsection
-@push('head')
+@push('scripts')
     <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>

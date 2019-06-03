@@ -66,10 +66,9 @@ class AttachmentController extends Controller
     public function edit(Attachment $attachment)
     {
         $tasks = Task::all();
-        $data = compact('tasks');
-        $data1 = compact('attachment');
+        $data = compact('tasks','attachment');
         //dd($data);
-        return view('attachments.edit',$data,$data1);
+        return view('attachments.edit',$data);
     }
 
     /**

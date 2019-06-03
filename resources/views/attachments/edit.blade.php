@@ -76,3 +76,15 @@
         </form>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+    $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/dist/adminlte.min.js')}}"></script>
+@endpush

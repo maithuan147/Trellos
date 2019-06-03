@@ -16,8 +16,10 @@ class TaskController extends Controller
     public function index()
     {
         $task = task::paginate(5);
+        // $comment = task::find(1)->listtask;
+        // dd($comment);
         $data = compact('task');
-        // dd('user');
+        // dd($data);
         return view('tasks.list',$data);
     }
 
@@ -40,14 +42,14 @@ class TaskController extends Controller
     public function store(Request $request , Task $task)
     {
         $this->validate($request,[
-            'title' => 'required|unique:tasks,title|min:3|max:255',
-           // 's'  => 'required'
+            'title' => 'unique:tasks,title|min:3|max:255',
+            'description'  => 'min:3|max:1000'
         ],[
-            'title.required' => 'ten ko dc rong',
-            'title.unique' => 'ten ko dc trung',
-            'title.min' => 'ten ko dc nho hon 3 ky tu',
-            'title.max' => 'ten ko dc rlon hon 255 ky tu',
-           // 's.required' => 'ko dc rong',
+            'title.unique' => 'Title không được trùng',
+            'title.min' => 'Tên không được nhỏ hơn 3 ký tự',
+            'title.max' => 'Tên không được lớn hơn 255 ký tự',
+            'description.min' => 'Tên không được nhỏ hơn 3 ký tự',
+            'description.max' => 'Tên không được lớn hơn 1000 ký tự',
         ]);
         $data = $request->all();
         $task->fill($data);
@@ -87,6 +89,16 @@ class TaskController extends Controller
      */
     public function update(Request $request, Task $task)
     {
+        $this->validate($request,[
+            'title' => 'unique:tasks,title|min:3|max:255',
+            'description'  => 'min:3|max:1000'
+        ],[
+            'title.unique' => 'Title không được trùng',
+            'title.min' => 'Tên không được nhỏ hơn 3 ký tự',
+            'title.max' => 'Tên không được lớn hơn 255 ký tự',
+            'description.min' => 'Tên không được nhỏ hơn 3 ký tự',
+            'description.max' => 'Tên không được lớn hơn 1000 ký tự',
+        ]);
         $data = $request->all();
         $task->fill($data);
         $task->save();

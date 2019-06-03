@@ -65,10 +65,9 @@ class LabelController extends Controller
     public function edit(Label $label)
     {
         $tasks = Task::all();
-        $data = compact('tasks');
-        $data1 = compact('label');
+        $data = compact('tasks','label');
         //dd($data);
-        return view('labels.edit',$data,$data1);
+        return view('labels.edit',$data);
     }
 
     /**

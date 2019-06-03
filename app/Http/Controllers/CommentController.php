@@ -71,10 +71,9 @@ class CommentController extends Controller
     public function edit(Comment $comment)
     {
         $tasks = Task::all();
-        $data = compact('tasks');
-        $data1 = compact('comment');
+        $data = compact('tasks','comment');
         //dd($data);
-        return view('comments.edit',$data,$data1);
+        return view('comments.edit',$data);
     }
 
     /**

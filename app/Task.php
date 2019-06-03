@@ -12,8 +12,8 @@ class Task extends Model
         'description',
         'status',
     ];
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function listtask(){
+        return $this->belongstoMany( Listtask::class , 'roles','task_id','listtask_id');
     }
     
     public function attachment(){

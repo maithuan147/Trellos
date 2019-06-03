@@ -76,7 +76,7 @@
         </form>
     </div>
 @endsection
-@push('head')
+@push('scripts')
     <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>

@@ -18,6 +18,6 @@ class User extends Authenticatable
         'status'
     ];
     public function role(){
-        return $this->belongsTo(Role::class);
+        return $this->belongsToMany(User::class , 'roles','task_id','user_id');
     }
 }

@@ -10,7 +10,7 @@ class Listtask extends Model
     protected $fillable = [
     	'title'
     ];
-    public function role(){
-        return $this->belongsTo(Role::class);
+    public function task(){
+        return $this->belongstoMany(Task::class,'roles','listtask_id','task_id');
     }
 }

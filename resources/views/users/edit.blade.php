@@ -17,39 +17,76 @@
     <div class="content-wrapper" style="min-height: calc(100vh - 105px);">
         <section class="content-header">
             <h1>
-                Simple Tables
-                <small>preview of simple tables</small>
+                User Tables
             </h1>
             <ol class="breadcrumb">
-                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-            
-                <li><a href="#">Tables</a></li>
-                <li class="active">Simple</li>
+                <li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li><a href="#">User</a></li>
+                <li class="active">Edit</li>
             </ol>
         </section>
-    <form method="POST" action="{{ route('user.update', $user) }}" class="mx-15 mt-20">
+    <form method="POST" action="{{ route('user.update', $user) }}" class="mx-15 mt-20" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="row">
-                <div class="col-md-9">
+            <div class="col-md-2">
+                    <div class="form-group col-md-12 bg-white" style="border:1px solid #ddd">
+                        <label for="imagefile" class="control-label required" aria-required="true" style="margin-bottom:0px"><img src="{{asset($user->image) }}" alt="#" style=" width: 150px;height:150px;border-radius: 100%; padding:10px">
+                                @foreach ($errors->get('image') as $err)
+                                    {{$err}}
+                                @endforeach
+                        </label>
+                        <input type="file" name="image" value="{{$user->image}}" required="true" style="visibility:hidden;width:0px;height:0px" id="imagefile">
+                    </div>
+                    @if (session('errfile'))
+                        <div class="alert alert-success">
+                            {{ session('errfile') }}
+                        </div>
+                    @endif
+                </div>
+                <div class="col-md-7">
                     <div class="main-form bg-white pxy-15">
                         <div class="form-body row">
                             <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Image<span style="color: red"> *</span></label>
-                                <input class="form-control" data-counter="30" name="image" value="{{ $user->image }}" type="file" required="">
+                                <label for="first_name" class="control-label required" aria-required="true">UserName
+                                    <span style="color: red"> *
+                                        @foreach ($errors->get('name') as $err)
+                                            {{$err}}
+                                        @endforeach
+                                    </span>
+                                </label>
+                                <input class="form-control" data-counter="30" name="name" value="{{ $user->name }}" type="text" required="">
                             </div>
                             <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">UserName<span style="color: red"> *</span></label>
-                                <input class="form-control" data-counter="30" name="username" value="{{ $user->name }}" type="text" required="">
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label for="first_name" class="control-label required" aria-required="true">Email<span style="color: red"> *</span></label>
+                                <label for="first_name" class="control-label required" aria-required="true">Email
+                                    <span style="color: red"> *
+                                        @foreach ($errors->get('email') as $err)
+                                            {{$err}}
+                                        @endforeach
+                                    </span>
+                                </label>
                                 <input class="form-control" data-counter="30" name="email" value="{{ $user->email }}" type="email" required="">
                             </div>
                             <div class="form-group col-md-6">
-                                    <label for="first_name" class="control-label required" aria-required="true">Password<span style="color: red"> *</span></label>
-                                    <input class="form-control" data-counter="30" name="password" value="{{ $user->password }}" type="password" required="">
+                                    <label for="first_name" class="control-label required" aria-required="true">Password
+                                        <span style="color: red"> *
+                                            @foreach ($errors->get('password') as $err)
+                                                {{$err}}
+                                            @endforeach
+                                        </span>
+                                    </label>
+                                    <input class="form-control" data-counter="30" name="password"  type="password" required="">
                                 </div>
+                            <div class="form-group col-md-6">
+                                <label class="control-label required" aria-required="true">Confirm Password
+                                    <span style="color: red"> *
+                                        @foreach ($errors->get('password_confirmation') as $err)
+                                            {{$err}}
+                                        @endforeach
+                                    </span>
+                                </label>
+                                <input class="form-control" data-counter="30" name="password_confirmation" type="password" required="">
+                            </div>
                             <div class="col-md-12">
                                 <label for="role_id" class="control-label">Status<span style="color: red"> *</span></label>
                                 <div class="ui-select-wrapper">
@@ -61,6 +98,7 @@
                             </div>
                         </div>
                     </div>
+                    {{ session('edit') }}
                     <p></p>
                 </div>
                 <div class="col-md-3 right-sidebar">
@@ -85,3 +123,15 @@
         </form>
     </div>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+    $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.7 -->
+    <script src="{{ asset('js/bootstrap/bootstrap.min.js')}}"></script>
+    <script src="{{ asset('js/dist/adminlte.min.js')}}"></script>
+@endpush

@@ -36,11 +36,11 @@
                         <div class="form-body row">
                             <div class="form-group col-md-6">
                                 <label for="first_name" class="control-label required" aria-required="true">Description<span style="color: red"> *</span></label>
-                                <input class="form-control" data-counter="30" name="description" type="text" required="" value="{{ $task->description }}">
+                                <input class="form-control" data-counter="30" name="description" type="text" required="" value="{{ $task->title }}">
                             </div>
                             <div class="form-group col-md-6">
                                 <label for="first_name" class="control-label required" aria-required="true">Content<span style="color: red"> *</span></label>
-                            <input class="form-control" data-counter="30" name="content" type="text" required="" value="{{ $task->content }}">
+                            <input class="form-control" data-counter="30" name="content" type="text" required="" value="{{ $task->description }}">
                             </div>
                             <div class="col-md-12">
                                 <label for="role_id" class="control-label">Status<span style="color: red"> *</span></label>
@@ -77,7 +77,7 @@
         </form>
     </div>
 @endsection
-@push('head')
+@push('scripts')
     <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>

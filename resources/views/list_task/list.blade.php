@@ -73,12 +73,19 @@
             </tr>
             @endforeach
         </table>
-        {{ $listtasks->links() }}
+        <div class="row mr-a30 ml-0">
+            <div class="col-sm-6">
+                <span class="dt-length-records">
+                <i class="fa fa-globe"></i> <span class="d-none d-sm-inline">Show from</span> {{ $listtasks->firstItem() }} to {{ $listtasks->lastItem() }} in <span class="badge badge-secondary bold badge-dt">{{ $listtasks->total() }}</span> <span class="hidden-xs">records</span>
+				</span>
+            </div>
+            <div class="col-sm-6 display-flex justify-content-end">{{ $listtasks->links() }}</div>
+        </div>
         </div>
     </div>
     
 @endsection
-@push('head')
+@push('scripts')
     <script src="{{ asset('js/jquery/jquery.min.js')}}"></script>
     <!-- jQuery UI 1.11.4 -->
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js')}}"></script>

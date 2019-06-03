@@ -14,12 +14,11 @@
 Route::get('/', function () {
     return view('auth.login');
 });
-Route::get('index', function () {
-    return view('index');
-})->name('index');
+Route::get('index', 'HomeController@index')->name('index');
 
 
 Route::group(['middleware'=>'auth'],function () {
+    Route::resource('role', 'RoleController');
     Route::resource('listtask', 'ListtaskController');
     Route::resource('user', 'UserController');
     Route::resource('task', 'TaskController');
@@ -33,3 +32,4 @@ Route::group(['middleware'=>'auth'],function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::put('/upload/{user}', 'HomeController@upload')->name('upload');
